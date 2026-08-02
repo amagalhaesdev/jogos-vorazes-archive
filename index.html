@@ -13,6 +13,14 @@
 <div class="grain"></div>
 <div class="vignette"></div>
 
+<!-- Player de música de fundo -->
+<!-- Troque o src abaixo pelo caminho do seu arquivo de música (mp3, ogg, etc) -->
+<audio id="trilha" src="src/audios/musica.mp3" loop preload="none"></audio>
+<button id="music-toggle" class="music-toggle" aria-label="Tocar/pausar música" type="button">
+  <svg id="icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="display:none;"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+</button>
+
 <!-- Menu de Navegação -->
 <nav>
   <div class="brand"><span class="mark"></span> PANEM · ARQUIVO</div>
@@ -160,7 +168,7 @@
       <article class="rcard" data-char="snow-jovem">
         <div class="rcard-top"><div class="rcard-district">C</div><div class="rcard-status">Mentor</div></div>
         <div class="rcard-portrait">
-          <img src="src/image/CoriolanusSnow-Jovem.jpg" alt="Coriolanus Snow (jovem)" loading="lazy"
+          <img src="src/image/CoriolanusSnow-Jovem.webp" alt="Coriolanus Snow (jovem)" loading="lazy"
                onerror="this.onerror=null;this.src='src/image/placeholder.png';">
           <div class="p-caption">Coriolanus Snow<small>Mentor de Lucy Gray</small></div>
         </div>
@@ -318,7 +326,7 @@
       <article class="rcard" data-char="lenoredove">
         <div class="rcard-top"><div class="rcard-district">12</div><div class="rcard-status">Família</div></div>
         <div class="rcard-portrait">
-          <img src="src/image/Lenore_Dove.png" alt="Lenore Dove Baird" loading="lazy"
+          <img src="src/image/Lenore_Dove.webp" alt="Lenore Dove Baird" loading="lazy"
                onerror="this.onerror=null;this.src='src/image/placeholder.png';">
           <div class="p-caption">Lenore Dove Baird<small>Amor de Haymitch</small></div>
         </div>
@@ -476,7 +484,7 @@
       <article class="rcard" data-char="prim">
         <div class="rcard-top"><div class="rcard-district">12</div><div class="rcard-status">Família</div></div>
         <div class="rcard-portrait">
-          <img src="src/image/Primrose_Everdeen.jpg" alt="Primrose Everdeen" loading="lazy"
+          <img src="src/image/Primrose_Everdeen.webp" alt="Primrose Everdeen" loading="lazy"
                onerror="this.onerror=null;this.src='src/image/placeholder.png';">
           <div class="p-caption">Primrose Everdeen<small>Irmã de Katniss</small></div>
         </div>
@@ -867,6 +875,39 @@
   <div class="credit">Que a sorte esteja sempre a seu favor</div>
 </footer>
 
+
+<script>
+  // Player de música de fundo. Como os navegadores bloqueiam áudio
+  // automático com som, a trilha só começa quando a pessoa toca no botão.
+  (function () {
+    var audio = document.getElementById('trilha');
+    var botao = document.getElementById('music-toggle');
+    var iconePlay = document.getElementById('icon-play');
+    var iconePause = document.getElementById('icon-pause');
+
+    botao.addEventListener('click', function () {
+      if (audio.paused) {
+        audio.play().catch(function () {
+          // Se o arquivo ainda não foi colocado em src/audio/musica.mp3, nada acontece
+        });
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', function () {
+      iconePlay.style.display = 'none';
+      iconePause.style.display = 'block';
+      botao.classList.add('is-playing');
+    });
+
+    audio.addEventListener('pause', function () {
+      iconePlay.style.display = 'block';
+      iconePause.style.display = 'none';
+      botao.classList.remove('is-playing');
+    });
+  })();
+</script>
 
 <script>
   // No celular não existe "hover", então um toque no card
