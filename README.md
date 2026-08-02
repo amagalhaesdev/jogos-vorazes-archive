@@ -2,6 +2,8 @@
 
 Projeto de fã inspirado no universo de **Jogos Vorazes**, criado com HTML e CSS.
 
+![Panem Arquivo](src/image/banner.jpeg)
+
 A ideia deste site foi reunir informações sobre a saga de forma visual, apresentando a história de Panem, os Jogos Vorazes, personagens importantes, distritos e a linha do tempo dos acontecimentos.
 
 ## Tecnologias utilizadas
